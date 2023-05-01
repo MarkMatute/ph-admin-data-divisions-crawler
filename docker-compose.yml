@@ -1,0 +1,36 @@
+version: '3'
+services:
+
+  starter-service:
+    container_name: starter-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: 'npm run dev'
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+    volumes:
+      - ./:/app
+      - '/app/node_modules'
+
+  # starter-mongo:
+  #   image: 'mongo:4.0'
+  #   container_name: starter-mongo
+  #   ports:
+  #     - '5300:27017'
+  #   volumes:
+  #     - './.data/mongo:/data/db'
+  #     - './.data/mongoconfigdb:/data/configdb'
+
+  # starter-mysql:
+  #   platform: linux/amd64
+  #   image: 'mysql:5.7.33'
+  #   container_name: starter-mysql
+  #   ports:
+  #     - '5302:3306'
+  #   env_file:
+  #     - .env
